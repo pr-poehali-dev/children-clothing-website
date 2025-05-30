@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useCart } from "@/contexts/CartContext";
 import type { Product } from "@/types";
 
 interface ProductCardProps {
@@ -8,6 +9,12 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
+
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       <div className="relative">
@@ -31,6 +38,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <Button
             size="sm"
             className="bg-purple-600 hover:bg-purple-700 rounded-full"
+            onClick={handleAddToCart}
           >
             В корзину
           </Button>
